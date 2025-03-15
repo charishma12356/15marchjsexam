@@ -112,22 +112,6 @@ const customMap = (arr, callback) => {
 console.log(customMap([1, 2, 3], num => num * 2)); 
 
 
-// 19. Write a function to find all permutations of a string.
-const stringPermutations = (str) => {
-  if (str.length <= 1) return [str];
-  
-  let perms = [];
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-    let remainingStr = str.slice(0, i) + str.slice(i + 1);
-    let subPerms = stringPermutations(remainingStr);
-    
-    subPerms.forEach(subPerm => perms.push(char + subPerm));
-  }
-  return perms;
-};
-
-console.log(stringPermutations("abc")); 
 
 //20.
 const firstNonRepeatingChar = (str) => {
