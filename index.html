@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>15thmarExam</title>
 </head>
 <body>
     <script>
+
         // 1. Write a function to reverse a string.
 const reverseString = (str) => str.split("").reverse().join("");
 console.log(reverseString("hello")); // Expected output: "olleh"
@@ -65,38 +66,8 @@ const countOccurrences = (str) =>
 
 console.log(countOccurrences("hello")); // Expected output: { h: 1, e: 1, l: 2, o: 1 }
 
-// 11. Write a function to flatten a nested array.
-const flattenArray = (arr) => arr.flat(Infinity);
 
-console.log(flattenArray([1, [2, [3, 4], 5], 6])); // Expected output: [1, 2, 3, 4, 5, 6]
 
-// 12. Write a function to implement a debounce function.
-const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func(...args), delay);
-  };
-};
-
-// 13. Write a function to implement a throttle function.
-const throttle = (func, limit) => {
-  let lastFunc;
-  let lastRan;
-  return (...args) => {
-    const now = Date.now();
-    if (!lastRan || now - lastRan >= limit) {
-      func(...args);
-      lastRan = now;
-    } else {
-      clearTimeout(lastFunc);
-      lastFunc = setTimeout(() => {
-        func(...args);
-        lastRan = Date.now();
-      }, limit - (now - lastRan));
-    }
-  };
-};
 
 
 // 14. Write a function to find the longest word in a string.
@@ -124,11 +95,112 @@ const data = [
 ];
 console.log(groupByKey(data, "category")); 
 
-//17.
-function mergeSortedArrays(arr1, arr2) {
-    let result = [];
+// 17. Write a function to merge two sorted arrays.
+const mergeSortedArrays = (arr1, arr2) => [...arr1, ...arr2].sort((a, b) => a - b);
+
+console.log(mergeSortedArrays([1, 3, 5], [2, 4, 6])); 
+
+// 18. Write a function to implement a custom map function.
+const customMap = (arr, callback) => {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result.push(callback(arr[i], i, arr));
+  }
+  return result;
+};
+
+console.log(customMap([1, 2, 3], num => num * 2)); 
+
+
+// 19. Write a function to find all permutations of a string.
+const stringPermutations = (str) => {
+  if (str.length <= 1) return [str];
+  
+  let perms = [];
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let remainingStr = str.slice(0, i) + str.slice(i + 1);
+    let subPerms = stringPermutations(remainingStr);
+    
+    subPerms.forEach(subPerm => perms.push(char + subPerm));
+  }
+  return perms;
+};
+
+console.log(stringPermutations("abc")); 
+
+//20.
+const firstNonRepeatingChar = (str) => {
+    let charCount = {};
+    for (let char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+    for (let char of str) {
+        if (charCount[char] === 1) return char;
+    }
+    return null; 
+};
+console.log(firstNonRepeatingChar("aabbcce")); 
+
+
+// 1. Find the output of the following code:
+console.log(1 + "2" + "2"); // "122"
+console.log(1 + +"2" + "2"); // "32"
+console.log(1 + -"1" + "2"); // "02"
+console.log(+"1" + "1" + "2"); // "112"
+console.log("A" - "B" + "2"); // "NaN2"
+console.log("A" - "B" + 2); // NaN
+
+//2.
+// console.log(0.1 + 0.2 === 0.3); // false
+
+// 3. What will be the output?
+let a = {};
+let b = { key: "b" };
+let c = { key: "c" };
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a[b]); // 456
+
+// 4. What does this function return?
+function foo() {
+    return
+    {
+        name: "John"
+    };
+}
+console.log(foo()); 
+
+// 5. How do you make this work?
+const sum = (a) => (b) => (c) => a + b + c;
+console.log(sum(2)(3)(4)); //9
+
+// 6. Implement a function that executes after a delay without using setTimeout.
+function delayExecution(func, delay) {
+    const start = Date.now();
+    while (Date.now() - start < delay) {
+    }
+    func();
 }
 
+
+// 8. What will be the output?
+console.log(typeof NaN); // type will be "number"
+
+// 9. How to check if an object is empty in JavaScript?
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
+// 10. What will be the output?
+function test() {
+    console.log(a); 
+    var a = 5;
+    console.log(a); // 5
+}
+test();
 
     </script>
 </body>
